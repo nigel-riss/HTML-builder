@@ -7,7 +7,7 @@ const OUTPUT_DIR = 'project-dist';
 const OUTPUT_FILE = 'bundle.css';
 
 const createBundle = async (stylesPath, outputPath) => {
-  let writeStream = createWriteStream(outputPath);
+  const writeStream = createWriteStream(outputPath);
 
   const files = await readdir(stylesPath, { withFileTypes: true });
   for (const file of files) {
@@ -16,7 +16,7 @@ const createBundle = async (stylesPath, outputPath) => {
     if (!file.isFile() || fileExt !== '.css') continue;
 
     const readStream = createReadStream(filePath);
-    writeStream = readStream.pipe(writeStream);
+    readStream.pipe(writeStream);
   }
 };
 
