@@ -6,7 +6,7 @@ const DEST_DIR = 'files-copy';
 
 const copyDir = async (srcDir, destDir) => {
   await rm(destDir, { recursive: true, force: true });
-  await mkdir(destDir);
+  await mkdir(destDir, { recursive: true });
 
   const files = await readdir(srcDir, { withFileTypes: true });
   for (const file of files) {
